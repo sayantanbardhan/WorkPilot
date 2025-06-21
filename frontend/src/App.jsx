@@ -237,7 +237,7 @@ function App() {
         </button>
 
         <button
-          onClick={() => window.open('https://lazypublishinghouse.atlassian.net/jira/software/c/projects/PO/boards/2', '_blank')}
+          onClick={() => alert('Configure your Jira domain in the .env file, then update this link to: https://YOUR_DOMAIN.atlassian.net')}
           className="action-button"
         >
           <span className="action-icon">🎯</span>
@@ -245,7 +245,7 @@ function App() {
         </button>
 
         <button
-          onClick={() => window.open('https://www.notion.so/2198f34bd71f80899389cbbaffc28d46', '_blank')}
+          onClick={() => alert('Configure your Notion database ID in the .env file, then update this link to your Notion workspace')}
           className="action-button"
         >
           <span className="action-icon">📋</span>

@@ -165,7 +165,7 @@ class OpenAIService {
             } catch (parseError) {
                 // Return default structure if parsing fails
                 return {
-                    jiraProject: 'PO', // User's actual project key
+                    jiraProject: process.env.JIRA_DEFAULT_PROJECT || 'WORK',
                     createJiraTasks: true,
                     createNotionPage: true,
                     priority: 'medium',
@@ -177,7 +177,7 @@ class OpenAIService {
             console.error('Error determining task destinations:', error);
             // Return safe defaults
             return {
-                jiraProject: 'PO', // User's actual project key
+                jiraProject: process.env.JIRA_DEFAULT_PROJECT || 'WORK',
                 createJiraTasks: true,
                 createNotionPage: true,
                 priority: 'medium',

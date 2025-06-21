@@ -194,8 +194,8 @@ app.post('/process-meeting-autonomous', upload.single('audio'), async (req, res)
                     }
                 }
             } else {
-                // Try using known project key as fallback
-                const fallbackProjectKey = 'PO'; // User's actual project
+                // Try using fallback project key from environment or default
+                const fallbackProjectKey = process.env.JIRA_DEFAULT_PROJECT || 'WORK';
                 console.log(`No projects detected via API, trying fallback project: ${fallbackProjectKey}`);
 
                 for (const item of actionItems) {
@@ -385,4 +385,5 @@ app.listen(PORT, () => {
     console.log(`🚀 WorkPilot server running on port ${PORT}`);
     console.log(`📋 Health check: http://localhost:${PORT}/health`);
     console.log(`🔧 Test integrations: http://localhost:${PORT}/test-integrations`);
+    console.log(`🌐 Frontend (if running): http://localhost:3000`);
 });

@@ -1,6 +1,16 @@
 #!/bin/bash
 
-echo "🚀 Starting WorkPilot with Docker..."
+echo "🚀 Starting WorkPilot..."
+
+# Check if .env exists
+if [ ! -f .env ]; then
+    echo "⚠️  .env file not found!"
+    echo "📋 Creating .env from template..."
+    cp .env.example .env
+    echo "✅ Please edit .env with your API keys, then run this script again."
+    echo "📖 See SETUP.md for detailed instructions."
+    exit 1
+fi
 
 # Check if Docker is running
 if ! docker info > /dev/null 2>&1; then
@@ -8,63 +18,25 @@ if ! docker info > /dev/null 2>&1; then
     exit 1
 fi
 
-# Check if .env file exists
-if [ ! -f ".env" ]; then
-    echo "⚠️  No .env file found. Creating one from template..."
-    cat > .env << EOF
-# WorkPilot Environment Variables
-# Fill in your actual API keys below
-
-# OpenAI API Key (Required - Paid service)
-OPENAI_API_KEY=sk-proj-your-openai-api-key-here
-
-# Slack Integration (Free)
-SLACK_BOT_TOKEN=xoxb-your-slack-bot-token-here
-SLACK_WEBHOOK_URL=https://hooks.slack.com/services/your/webhook/url
-
-# Jira Integration (Free tier available)
-JIRA_API_TOKEN=your-jira-api-token-here
-JIRA_DOMAIN=your-domain.atlassian.net
-JIRA_EMAIL=your-email@example.com
-
-# Notion Integration (Free tier available)
-NOTION_TOKEN=ntn_your-notion-integration-token-here
-
-# Server Configuration
-PORT=3001
-NODE_ENV=production
-EOF
-    echo "📝 Please edit the .env file with your actual API keys, then run this script again."
-    echo "💡 You can edit it with: nano .env"
-    exit 1
-fi
-
-# Build and start containers
-echo "🔨 Building Docker containers..."
-docker-compose build
-
-echo "🚀 Starting WorkPilot services..."
+# Start WorkPilot
+echo "🐳 Starting containers..."
 docker-compose up -d
 
-# Wait for services to start
-echo "⏳ Waiting for services to start..."
-sleep 10
+# Wait a moment for containers to start
+sleep 3
 
-# Check if services are running
+# Check if containers are running
 if docker-compose ps | grep -q "Up"; then
+    echo ""
     echo "✅ WorkPilot is running!"
     echo ""
-    echo "🌐 Access your application:"
-    echo "   Frontend: http://localhost"
-    echo "   Backend API: http://localhost:3001"
-    echo "   Health Check: http://localhost:3001/health"
+    echo "�� Frontend: http://localhost:3000"
+    echo "🔧 Backend API: http://localhost:3001"
+    echo "📋 Health Check: http://localhost:3001/health"
     echo ""
-    echo "📋 Useful commands:"
-    echo "   View logs: docker-compose logs -f"
-    echo "   Stop services: docker-compose down"
-    echo "   Restart: docker-compose restart"
-    echo ""
+    echo "📖 See SETUP.md for configuration help"
+    echo "🛑 To stop: docker-compose down"
 else
-    echo "❌ Something went wrong. Check the logs:"
-    docker-compose logs
-fi 
+    echo "❌ Failed to start containers. Check logs:"
+    echo "   docker-compose logs"
+fi
