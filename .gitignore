@@ -118,11 +118,29 @@ tmp/
 .dockerignore
 
 # WorkPilot specific
-backend/uploads/*
-!backend/uploads/.gitkeep
-backend/temp/*
-!backend/temp/.gitkeep
+backend/uploads/
+backend/temp/
 ngrok.log
+*.ngrok.log
+
+# Docker & containers
+docker-compose.override.yml
+.docker/
+*.dockerignore
+
+# API Keys & Secrets (extra safety)
+*api-key*
+*secret*
+*token*
+*password*
+config/secrets.json
+.secrets
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
 
 # Audio processing files
 *.wav
@@ -131,8 +149,77 @@ ngrok.log
 *.aac
 *.ogg
 *.flac
+*.wma
+*.opus
+
+# Video files (comprehensive)
+*.mp4
+*.avi
+*.mkv
+*.mov
+*.wmv
+*.flv
+*.webm
+*.m4v
+*.3gp
+*.ogv
+
+# Archive files (comprehensive)
+*.zip
+*.rar
+*.7z
+*.tar
+*.tar.gz
+*.tar.bz2
+*.tar.xz
+*.gz
+*.bz2
+*.xz
+*.Z
+
+# Large files that shouldn't be in git
+*.iso
+*.dmg
+*.pkg
+*.deb
+*.rpm
+
+# AI/ML model files
+*.model
+*.pkl
+*.pickle
+*.h5
+*.pb
+*.onnx
+*.pt
+*.pth
+
+# Certificate files
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+
+# Jupyter notebooks checkpoints
+.ipynb_checkpoints/
+
+# Python cache (if any python scripts)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
 
 # Backup files
 *.bak
 *.backup
-*.old 
+*.old
+*~
+*.swp
+*.swo
+
+# System files
+.fseventsd/
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent 
