@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    container_name: workpilot-backend
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+      # Add your API keys here or use .env file
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - SLACK_BOT_TOKEN=${SLACK_BOT_TOKEN}
+      - SLACK_WEBHOOK_URL=${SLACK_WEBHOOK_URL}
+      - JIRA_API_TOKEN=${JIRA_API_TOKEN}
+      - JIRA_DOMAIN=${JIRA_DOMAIN}
+      - JIRA_EMAIL=${JIRA_EMAIL}
+      - JIRA_DEFAULT_PROJECT=${JIRA_DEFAULT_PROJECT:-WORK}
+      - NOTION_TOKEN=${NOTION_TOKEN}
+      - NOTION_DEFAULT_PAGE_ID=${NOTION_DEFAULT_PAGE_ID}
+    volumes:
+      - ./backend/uploads:/app/uploads
+      - ./backend/temp:/app/temp
+    networks:
+      - workpilot-network
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    container_name: workpilot-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - workpilot-network
+    restart: unless-stopped
+
+networks:
+  workpilot-network:
+    driver: bridge
+
+volumes:
+  uploads:
+  temp:

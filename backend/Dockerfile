@@ -29,4 +29,4 @@ RUN mkdir -p uploads temp
 EXPOSE 3001
 
 # Start the application
-CMD ["node", "index.js"] 
+CMD ["node", "src/server.js"] 

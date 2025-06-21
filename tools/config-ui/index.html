@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WorkPilot Configuration</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .form-container {
+            padding: 2rem;
+        }
+
+        .service-section {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            border: 2px solid #f0f0f0;
+            border-radius: 15px;
+            background: #fafafa;
+        }
+
+        .service-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .service-icon {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+        }
+
+        .service-description {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .optional {
+            color: #888;
+            font-size: 0.8rem;
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .toggle {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+            margin-right: 1rem;
+        }
+
+        .toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #667eea;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        .generate-btn {
+            width: 100%;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .generate-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .output-container {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            display: none;
+        }
+
+        .output-header {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .output-content {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            white-space: pre-wrap;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .copy-btn {
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .instructions {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #e3f2fd;
+            border-radius: 8px;
+            border-left: 4px solid #2196f3;
+        }
+
+        .service-section.disabled {
+            opacity: 0.6;
+        }
+
+        .service-section.disabled input {
+            background: #f5f5f5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 WorkPilot</h1>
+            <p>Configuration Wizard</p>
+        </div>
+
+        <div class="form-container">
+            <form id="configForm">
+                <!-- OpenAI Section -->
+                <div class="service-section">
+                    <div class="service-header">
+                        <span class="service-icon">🤖</span>
+                        OpenAI Configuration
+                    </div>
+                    <div class="service-description">
+                        Required for AI meeting processing and task extraction.
+                        <br><a href="https://platform.openai.com/api-keys" target="_blank">Get your API key here →</a>
+                    </div>
+                    <div class="form-group">
+                        <label for="openai_key">OpenAI API Key *</label>
+                        <input type="password" id="openai_key" name="openai_key" placeholder="sk-proj-..." required>
+                    </div>
+                </div>
+
+                <!-- Slack Section -->
+                <div class="service-section" id="slack-section">
+                    <div class="toggle-container">
+                        <label class="toggle">
+                            <input type="checkbox" id="slack-toggle" checked>
+                            <span class="slider"></span>
+                        </label>
+                        <div class="service-header">
+                            <span class="service-icon">💬</span>
+                            Slack Configuration
+                        </div>
+                    </div>
+                    <div class="service-description">
+                        Get notifications when tasks are created.
+                        <br><a href="https://api.slack.com/apps" target="_blank">Create a Slack app here →</a>
+                    </div>
+                    <div class="form-group">
+                        <label for="slack_token">Slack Bot Token</label>
+                        <input type="password" id="slack_token" name="slack_token" placeholder="xoxb-...">
+                    </div>
+                    <div class="form-group">
+                        <label for="slack_webhook">Slack Webhook URL <span class="optional">(optional)</span></label>
+                        <input type="url" id="slack_webhook" name="slack_webhook" placeholder="https://hooks.slack.com/...">
+                    </div>
+                </div>
+
+                <!-- Jira Section -->
+                <div class="service-section" id="jira-section">
+                    <div class="toggle-container">
+                        <label class="toggle">
+                            <input type="checkbox" id="jira-toggle" checked>
+                            <span class="slider"></span>
+                        </label>
+                        <div class="service-header">
+                            <span class="service-icon">🎯</span>
+                            Jira Configuration
+                        </div>
+                    </div>
+                    <div class="service-description">
+                        Automatically create tasks in your Jira projects.
+                        <br><a href="https://id.atlassian.com/manage-profile/security/api-tokens" target="_blank">Get your API token here →</a>
+                    </div>
+                    <div class="form-group">
+                        <label for="jira_domain">Jira Domain</label>
+                        <input type="text" id="jira_domain" name="jira_domain" placeholder="company.atlassian.net">
+                    </div>
+                    <div class="form-group">
+                        <label for="jira_email">Jira Email</label>
+                        <input type="email" id="jira_email" name="jira_email" placeholder="your-email@company.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="jira_token">Jira API Token</label>
+                        <input type="password" id="jira_token" name="jira_token" placeholder="ATATT...">
+                    </div>
+                    <div class="form-group">
+                        <label for="jira_project">Default Project Key</label>
+                        <input type="text" id="jira_project" name="jira_project" placeholder="WORK" value="WORK">
+                    </div>
+                </div>
+
+                <!-- Notion Section -->
+                <div class="service-section" id="notion-section">
+                    <div class="toggle-container">
+                        <label class="toggle">
+                            <input type="checkbox" id="notion-toggle" checked>
+                            <span class="slider"></span>
+                        </label>
+                        <div class="service-header">
+                            <span class="service-icon">📋</span>
+                            Notion Configuration
+                        </div>
+                    </div>
+                    <div class="service-description">
+                        Organize meeting notes and summaries in Notion.
+                        <br><a href="https://www.notion.so/my-integrations" target="_blank">Create an integration here →</a>
+                    </div>
+                    <div class="form-group">
+                        <label for="notion_token">Notion Integration Token</label>
+                        <input type="password" id="notion_token" name="notion_token" placeholder="ntn_...">
+                    </div>
+                    <div class="form-group">
+                        <label for="notion_page">Notion Database ID <span class="optional">(optional)</span></label>
+                        <input type="text" id="notion_page" name="notion_page" placeholder="Database ID from URL">
+                    </div>
+                </div>
+
+                <!-- App Configuration -->
+                <div class="service-section">
+                    <div class="service-header">
+                        <span class="service-icon">⚙️</span>
+                        Application Settings
+                    </div>
+                    <div class="form-group">
+                        <label for="node_env">Environment</label>
+                        <select id="node_env" name="node_env" style="width: 100%; padding: 0.75rem; border: 2px solid #e1e5e9; border-radius: 8px; font-size: 1rem;">
+                            <option value="development">Development</option>
+                            <option value="production">Production</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="port">Backend Port</label>
+                        <input type="number" id="port" name="port" value="3001" min="1000" max="65535">
+                    </div>
+                </div>
+
+                <button type="submit" class="generate-btn">
+                    🚀 Generate .env Configuration
+                </button>
+            </form>
+
+            <div class="output-container" id="output">
+                <div class="output-header">📄 Generated .env File:</div>
+                <div class="output-content" id="env-content"></div>
+                <button class="copy-btn" onclick="copyToClipboard()">📋 Copy to Clipboard</button>
+                
+                <div class="instructions">
+                    <strong>📋 Next Steps:</strong>
+                    <ol style="margin-top: 0.5rem; padding-left: 1.5rem;">
+                        <li>Copy the content above</li>
+                        <li>Save it as <code>.env</code> in your WorkPilot root directory</li>
+                        <li>Run <code>docker-compose up -d</code></li>
+                        <li>Open <a href="http://localhost:3000" target="_blank">http://localhost:3000\</a\>\</li\>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle functionality
+        document.querySelectorAll('.toggle input').forEach(toggle => {
+            toggle.addEventListener('change', function() {
+                const section = this.closest('.service-section');
+                if (this.checked) {
+                    section.classList.remove('disabled');
+                    section.querySelectorAll('input').forEach(input => input.disabled = false);
+                } else {
+                    section.classList.add('disabled');
+                    section.querySelectorAll('input').forEach(input => {
+                        if (input.type !== 'checkbox') input.disabled = true;
+                    });
+                }
+            });
+        });
+
+        // Form submission
+        document.getElementById('configForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            generateEnvFile();
+        });
+
+        function generateEnvFile() {
+            const formData = new FormData(document.getElementById('configForm'));
+            const now = new Date().toISOString();
+            
+            let envContent = `# WorkPilot Configuration
+# Generated by Web Configuration Wizard on ${now}
+
+# OpenAI Configuration
+OPENAI_API_KEY=${formData.get('openai_key') || ''}
+
+# Slack Configuration
+SLACK_BOT_TOKEN=${document.getElementById('slack-toggle').checked ? (formData.get('slack_token') || '') : ''}
+SLACK_WEBHOOK_URL=${document.getElementById('slack-toggle').checked ? (formData.get('slack_webhook') || '') : ''}
+
+# Jira Configuration
+JIRA_API_TOKEN=${document.getElementById('jira-toggle').checked ? (formData.get('jira_token') || '') : ''}
+JIRA_DOMAIN=${document.getElementById('jira-toggle').checked ? (formData.get('jira_domain') || '') : ''}
+JIRA_EMAIL=${document.getElementById('jira-toggle').checked ? (formData.get('jira_email') || '') : ''}
+JIRA_DEFAULT_PROJECT=${document.getElementById('jira-toggle').checked ? (formData.get('jira_project') || 'WORK') : 'WORK'}
+
+# Notion Configuration
+NOTION_TOKEN=${document.getElementById('notion-toggle').checked ? (formData.get('notion_token') || '') : ''}
+NOTION_DEFAULT_PAGE_ID=${document.getElementById('notion-toggle').checked ? (formData.get('notion_page') || '') : ''}
+
+# Application Configuration
+NODE_ENV=${formData.get('node_env') || 'development'}
+PORT=${formData.get('port') || '3001'}
+`;
+
+            document.getElementById('env-content').textContent = envContent;
+            document.getElementById('output').style.display = 'block';
+            document.getElementById('output').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function copyToClipboard() {
+            const content = document.getElementById('env-content').textContent;
+            navigator.clipboard.writeText(content).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                const originalText = btn.textContent;
+                btn.textContent = '✅ Copied!';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

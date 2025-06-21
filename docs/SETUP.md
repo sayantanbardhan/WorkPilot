@@ -8,16 +8,29 @@
    cd WorkPilot
    ```
 
-2. **Set up environment variables**
+2. **Run the setup script**
    ```bash
-   cp .env.example .env
+   ./start-workpilot.sh
    ```
-   Then edit `.env` with your actual credentials.
 
-3. **Start WorkPilot**
-   ```bash
-   docker-compose up -d
-   ```
+3. **Choose your preferred setup method:**
+
+   ### 🧙‍♂️ Interactive Setup Wizard (Recommended)
+   - Terminal-based step-by-step configuration
+   - Guides you through each service setup
+   - Automatically generates `.env` file
+   - Perfect for first-time users
+
+   ### 🌐 Web Configuration Interface
+   - Beautiful browser-based setup
+   - Visual form with toggles and validation
+   - Copy-paste generated configuration
+   - Great for visual learners
+
+   ### 📝 Manual Setup
+   - Edit `.env` file directly
+   - Full control over configuration
+   - Good for advanced users
 
 4. **Access WorkPilot**
    - Frontend: http://localhost:3000
