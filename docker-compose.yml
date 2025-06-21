@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    container_name: workpilot-backend
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+      # Add your API keys here or use .env file
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - SLACK_BOT_TOKEN=${SLACK_BOT_TOKEN}
+      - SLACK_WEBHOOK_URL=${SLACK_WEBHOOK_URL}
+      - JIRA_API_TOKEN=${JIRA_API_TOKEN}
+      - JIRA_DOMAIN=${JIRA_DOMAIN}
+      - JIRA_EMAIL=lazypublishinghouse@gmail.com
+      - NOTION_TOKEN=${NOTION_TOKEN}
+      - NOTION_DEFAULT_PAGE_ID=2198f34b-d71f-8089-9389-cbbaffc28d46
+      # To get your NOTION_DEFAULT_PAGE_ID:
+      # 1. Create a page in Notion called "WorkPilot Meeting Notes"
+      # 2. Share it with your integration (give "Can edit" permission)
+      # 3. Copy the page ID from the URL (the long string after the last dash)
+      # 4. Set NOTION_DEFAULT_PAGE_ID=your-page-id-here in your environment
+    volumes:
+      - ./backend/uploads:/app/uploads
+      - ./backend/temp:/app/temp
+    networks:
+      - workpilot-network
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    container_name: workpilot-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - workpilot-network
+    restart: unless-stopped
+
+networks:
+  workpilot-network:
+    driver: bridge
+
+volumes:
+  uploads:
+  temp:
