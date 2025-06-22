@@ -33,7 +33,7 @@
    - Good for advanced users
 
 4. **Access WorkPilot**
-   - Frontend: http://localhost:3000
+   - Frontend: http://localhost (port 80)
    - Backend API: http://localhost:3001
 
 ## Environment Configuration
@@ -106,7 +106,7 @@ WorkPilot/
 ### Getting Help
 
 - Check the logs: `docker-compose logs backend`
-- Test integrations: http://localhost:3001/test-integrations
+- Test integrations: http://localhost:3001/api/integrations/test
 - Health check: http://localhost:3001/health
 
 ## Development

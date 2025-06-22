@@ -7,7 +7,7 @@ app.listen(PORT, () => {
     console.log(`🚀 WorkPilot server running on port ${PORT}`);
     console.log(`📋 Health check: http://localhost:${PORT}/health`);
     console.log(`🔧 Test integrations: http://localhost:${PORT}/api/integrations/test`);
-    console.log(`🌐 Frontend (if running): http://localhost:3000`);
+    console.log(`🌐 Frontend (if running): http://localhost (port 80)`);
     console.log(`📖 API Documentation: http://localhost:${PORT}/api/docs`);
 });
 

@@ -60,7 +60,7 @@ workpilot/
    - 📝 **Manual Setup** - Edit `.env` file directly
 
 3. **Start Processing Meetings**
-   - Open http://localhost:3000
+   - Open http://localhost (port 80)
    - Upload audio or paste transcript
    - Watch AI create tasks automatically!
 

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,7 +25,7 @@
             margin: 0 auto;
             background: white;
             border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
             overflow: hidden;
         }
 
@@ -151,11 +152,11 @@
             border-radius: 50%;
         }
 
-        input:checked + .slider {
+        input:checked+.slider {
             background-color: #667eea;
         }
 
-        input:checked + .slider:before {
+        input:checked+.slider:before {
             transform: translateX(26px);
         }
 
@@ -230,6 +231,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="header">
@@ -277,7 +279,8 @@
                     </div>
                     <div class="form-group">
                         <label for="slack_webhook">Slack Webhook URL <span class="optional">(optional)</span></label>
-                        <input type="url" id="slack_webhook" name="slack_webhook" placeholder="https://hooks.slack.com/...">
+                        <input type="url" id="slack_webhook" name="slack_webhook"
+                            placeholder="https://hooks.slack.com/...">
                     </div>
                 </div>
 
@@ -295,7 +298,8 @@
                     </div>
                     <div class="service-description">
                         Automatically create tasks in your Jira projects.
-                        <br><a href="https://id.atlassian.com/manage-profile/security/api-tokens" target="_blank">Get your API token here →</a>
+                        <br><a href="https://id.atlassian.com/manage-profile/security/api-tokens" target="_blank">Get
+                            your API token here →</a>
                     </div>
                     <div class="form-group">
                         <label for="jira_domain">Jira Domain</label>
@@ -329,7 +333,8 @@
                     </div>
                     <div class="service-description">
                         Organize meeting notes and summaries in Notion.
-                        <br><a href="https://www.notion.so/my-integrations" target="_blank">Create an integration here →</a>
+                        <br><a href="https://www.notion.so/my-integrations" target="_blank">Create an integration here
+                            →</a>
                     </div>
                     <div class="form-group">
                         <label for="notion_token">Notion Integration Token</label>
@@ -349,7 +354,8 @@
                     </div>
                     <div class="form-group">
                         <label for="node_env">Environment</label>
-                        <select id="node_env" name="node_env" style="width: 100%; padding: 0.75rem; border: 2px solid #e1e5e9; border-radius: 8px; font-size: 1rem;">
+                        <select id="node_env" name="node_env"
+                            style="width: 100%; padding: 0.75rem; border: 2px solid #e1e5e9; border-radius: 8px; font-size: 1rem;">
                             <option value="development">Development</option>
                             <option value="production">Production</option>
                         </select>
@@ -369,14 +375,14 @@
                 <div class="output-header">📄 Generated .env File:</div>
                 <div class="output-content" id="env-content"></div>
                 <button class="copy-btn" onclick="copyToClipboard()">📋 Copy to Clipboard</button>
-                
+
                 <div class="instructions">
                     <strong>📋 Next Steps:</strong>
                     <ol style="margin-top: 0.5rem; padding-left: 1.5rem;">
                         <li>Copy the content above</li>
                         <li>Save it as <code>.env</code> in your WorkPilot root directory</li>
                         <li>Run <code>docker-compose up -d</code></li>
-                        <li>Open <a href="http://localhost:3000" target="_blank">http://localhost:3000\</a\>\</li\>
+                        <li>Open <a href="http://localhost" target="_blank">http://localhost (port 80)</a></li>
                     </ol>
                 </div>
             </div>
@@ -386,7 +392,7 @@
     <script>
         // Toggle functionality
         document.querySelectorAll('.toggle input').forEach(toggle => {
-            toggle.addEventListener('change', function() {
+            toggle.addEventListener('change', function () {
                 const section = this.closest('.service-section');
                 if (this.checked) {
                     section.classList.remove('disabled');
@@ -401,7 +407,7 @@
         });
 
         // Form submission
-        document.getElementById('configForm').addEventListener('submit', function(e) {
+        document.getElementById('configForm').addEventListener('submit', function (e) {
             e.preventDefault();
             generateEnvFile();
         });
@@ -409,7 +415,7 @@
         function generateEnvFile() {
             const formData = new FormData(document.getElementById('configForm'));
             const now = new Date().toISOString();
-            
+
             let envContent = `# WorkPilot Configuration
 # Generated by Web Configuration Wizard on ${now}
 
@@ -453,4 +459,5 @@ PORT=${formData.get('port') || '3001'}
         }
     </script>
 </body>
+
 </html>

@@ -125,7 +125,7 @@ This shows:
 
 After configuration:
 1. Run `docker-compose up -d` to start WorkPilot
-2. Open http://localhost:3000 to access the interface
+2. Open http://localhost (port 80) to access the interface
 3. Upload audio or paste meeting transcripts
 4. Watch AI automatically create tasks across your integrated services!
 

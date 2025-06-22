@@ -91,7 +91,7 @@ if docker-compose -f config/docker-compose.yml ps | grep -q "Up"; then
     echo ""
     echo "✅ WorkPilot is running!"
     echo ""
-    echo "�� Frontend: http://localhost:3000"
+    echo "🌐 Frontend: http://localhost (port 80)"
     echo "🔧 Backend API: http://localhost:3001"
     echo "📋 Health Check: http://localhost:3001/health"
     echo ""

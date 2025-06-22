@@ -33,9 +33,9 @@ async function collectOpenAIConfig() {
     console.log('\n🤖 OpenAI Configuration');
     console.log('======================');
     console.log('Get your API key from: https://platform.openai.com/api-keys');
-    
+
     config.OPENAI_API_KEY = await askQuestion('Enter your OpenAI API key');
-    
+
     if (!config.OPENAI_API_KEY) {
         console.log('⚠️  Warning: OpenAI API key is required for AI processing');
     }
@@ -45,9 +45,9 @@ async function collectSlackConfig() {
     console.log('\n💬 Slack Configuration');
     console.log('======================');
     console.log('Create a Slack app at: https://api.slack.com/apps');
-    
+
     const useSlack = await askQuestion('Do you want to configure Slack? (y/n)', 'y');
-    
+
     if (useSlack.toLowerCase() === 'y') {
         config.SLACK_BOT_TOKEN = await askQuestion('Enter your Slack Bot Token (xoxb-...)');
         config.SLACK_WEBHOOK_URL = await askQuestion('Enter your Slack Webhook URL (optional)');
@@ -61,9 +61,9 @@ async function collectJiraConfig() {
     console.log('\n🎯 Jira Configuration');
     console.log('=====================');
     console.log('Get your API token from: https://id.atlassian.com/manage-profile/security/api-tokens');
-    
+
     const useJira = await askQuestion('Do you want to configure Jira? (y/n)', 'y');
-    
+
     if (useJira.toLowerCase() === 'y') {
         config.JIRA_DOMAIN = await askQuestion('Enter your Jira domain (e.g., company.atlassian.net)');
         config.JIRA_EMAIL = await askQuestion('Enter your Jira email address');
@@ -81,9 +81,9 @@ async function collectNotionConfig() {
     console.log('\n📋 Notion Configuration');
     console.log('========================');
     console.log('Create an integration at: https://www.notion.so/my-integrations');
-    
+
     const useNotion = await askQuestion('Do you want to configure Notion? (y/n)', 'y');
-    
+
     if (useNotion.toLowerCase() === 'y') {
         config.NOTION_TOKEN = await askQuestion('Enter your Notion Integration Token');
         config.NOTION_DEFAULT_PAGE_ID = await askQuestion('Enter your Notion Database ID (optional)');
@@ -96,7 +96,7 @@ async function collectNotionConfig() {
 async function collectAppConfig() {
     console.log('\n⚙️  Application Configuration');
     console.log('=============================');
-    
+
     config.NODE_ENV = await askQuestion('Environment (development/production)', 'development');
     config.PORT = await askQuestion('Backend port', '3001');
 }
@@ -132,19 +132,19 @@ PORT=${config.PORT}
 }
 
 function displaySummary() {
-    console.log('\n�� Configuration Summary');
+    console.log('\n🔄 Configuration Summary');
     console.log('========================');
-    
+
     console.log(`🤖 OpenAI: ${config.OPENAI_API_KEY ? '✅ Configured' : '❌ Not configured'}`);
     console.log(`💬 Slack: ${config.SLACK_BOT_TOKEN ? '✅ Configured' : '❌ Not configured'}`);
     console.log(`🎯 Jira: ${config.JIRA_API_TOKEN ? '✅ Configured' : '❌ Not configured'}`);
     console.log(`📋 Notion: ${config.NOTION_TOKEN ? '✅ Configured' : '❌ Not configured'}`);
-    
+
     console.log('\n🚀 Next Steps:');
     console.log('1. Run: docker-compose up -d');
-    console.log('2. Open: http://localhost:3000');
+    console.log('2. Open: http://localhost (port 80)');
     console.log('3. Start processing meetings!');
-    
+
     if (!config.OPENAI_API_KEY) {
         console.log('\n⚠️  Note: You need at least OpenAI API key for basic functionality');
     }
@@ -157,11 +157,11 @@ async function main() {
         await collectJiraConfig();
         await collectNotionConfig();
         await collectAppConfig();
-        
+
         console.log('\n🔄 Generating configuration...');
         generateEnvFile();
         displaySummary();
-        
+
     } catch (error) {
         console.log('\n❌ Setup cancelled or error occurred:', error.message);
     } finally {
