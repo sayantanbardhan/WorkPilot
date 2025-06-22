@@ -403,7 +403,7 @@ const AutomationPage = () => {
     setLoading(false);
   };
 
-  return (
+    return (
     <div className="min-h-screen bg-gradient-to-br from-primary-50 via-white to-accent-50 pt-24">
       <div className="container-custom px-4 py-8">
         {/* Header */}
@@ -466,34 +466,34 @@ const AutomationPage = () => {
                         }`}
                     />
                   </button>
-                </div>
-              </div>
+          </div>
+        </div>
 
               {/* Form */}
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Meeting Title */}
                 <div>
                   <label className="block text-sm font-medium text-neutral-700 mb-2">
-                    Meeting Title
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.meetingTitle}
-                    onChange={(e) => setFormData({ ...formData, meetingTitle: e.target.value })}
-                    placeholder="Enter your meeting title..."
+                Meeting Title
+              </label>
+              <input
+                type="text"
+                value={formData.meetingTitle}
+                onChange={(e) => setFormData({ ...formData, meetingTitle: e.target.value })}
+                placeholder="Enter your meeting title..."
                     className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
-                  />
-                </div>
+              />
+            </div>
 
                 {/* Audio Upload */}
                 <div>
                   <label className="block text-sm font-medium text-neutral-700 mb-2">
-                    Audio File
-                  </label>
-                  <input
-                    type="file"
-                    accept="audio/*"
-                    onChange={(e) => setAudioFile(e.target.files[0])}
+                Audio File
+              </label>
+                <input
+                  type="file"
+                  accept="audio/*"
+                  onChange={(e) => setAudioFile(e.target.files[0])}
                     className="hidden"
                     id="audio-upload"
                   />
@@ -529,72 +529,72 @@ const AutomationPage = () => {
                         <p className="text-sm text-neutral-500">Supports MP3, WAV, M4A, and other audio formats</p>
                       </div>
                     )}
-                  </label>
-                </div>
+                </label>
+            </div>
 
                 {/* Transcript */}
                 <div>
                   <label className="block text-sm font-medium text-neutral-700 mb-2">
-                    Or Paste Transcript
-                  </label>
-                  <textarea
-                    value={formData.transcript}
-                    onChange={(e) => setFormData({ ...formData, transcript: e.target.value })}
-                    placeholder="Paste your meeting transcript here..."
-                    rows="6"
+                Or Paste Transcript
+              </label>
+              <textarea
+                value={formData.transcript}
+                onChange={(e) => setFormData({ ...formData, transcript: e.target.value })}
+                placeholder="Paste your meeting transcript here..."
+                rows="6"
                     className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
-                  />
-                </div>
+              />
+            </div>
 
                 {/* Manual Configuration (when autonomous mode is off) */}
-                {!autonomousMode && (
+            {!autonomousMode && (
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-neutral-700 mb-2">
-                        Jira Project Key
-                      </label>
-                      <input
-                        type="text"
-                        value={formData.projectKey}
-                        onChange={(e) => setFormData({ ...formData, projectKey: e.target.value })}
+                    Jira Project Key
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.projectKey}
+                    onChange={(e) => setFormData({ ...formData, projectKey: e.target.value })}
                         placeholder="e.g., WORK"
                         className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
-                      />
-                    </div>
+                  />
+                </div>
                     <div>
                       <label className="block text-sm font-medium text-neutral-700 mb-2">
-                        Notion Page ID
-                      </label>
-                      <input
-                        type="text"
-                        value={formData.notionPageId}
-                        onChange={(e) => setFormData({ ...formData, notionPageId: e.target.value })}
-                        placeholder="Notion page ID"
+                    Notion Page ID
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.notionPageId}
+                    onChange={(e) => setFormData({ ...formData, notionPageId: e.target.value })}
+                    placeholder="Notion page ID"
                         className="w-full px-4 py-3 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
-                      />
-                    </div>
+                  />
+                </div>
                   </div>
-                )}
+            )}
 
                 {/* Submit Button */}
-                <button
-                  type="submit"
-                  disabled={loading || (!audioFile && !formData.transcript)}
+          <button
+            type="submit"
+            disabled={loading || (!audioFile && !formData.transcript)}
                   className="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
-                >
-                  {loading ? (
-                    <>
+          >
+            {loading ? (
+              <>
                       <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
                       <span>Processing...</span>
-                    </>
-                  ) : (
-                    <>
+              </>
+            ) : (
+              <>
                       <Bot className="w-5 h-5" />
                       <span>{autonomousMode ? 'Process Autonomously' : 'Process Meeting'}</span>
-                    </>
-                  )}
-                </button>
-              </form>
+              </>
+            )}
+          </button>
+        </form>
             </motion.div>
           </div>
 
@@ -648,21 +648,21 @@ const AutomationPage = () => {
                   </div>
                   <div className="flex items-center space-x-3">
                     <BookOpen className="w-5 h-5" />
-                    <span>Automatic Notion organization</span>
-                  </div>
+                <span>Automatic Notion organization</span>
+              </div>
                   <div className="flex items-center space-x-3">
                     <Slack className="w-5 h-5" />
-                    <span>Instant Slack notifications</span>
-                  </div>
+                <span>Instant Slack notifications</span>
+              </div>
                   <div className="flex items-center space-x-3">
                     <Zap className="w-5 h-5" />
-                    <span>Zero manual configuration</span>
-                  </div>
-                </div>
+                <span>Zero manual configuration</span>
+              </div>
+            </div>
               </motion.div>
             )}
           </div>
-        </div>
+      </div>
 
         {/* Results Display */}
         {results && (
@@ -677,27 +677,27 @@ const AutomationPage = () => {
                 <CheckCircle className="w-6 h-6 text-green-500" />
                 <span>Processing Results</span>
               </h3>
-              <button
+        <button
                 onClick={() => setResults(null)}
                 className="text-neutral-400 hover:text-neutral-600"
-              >
+        >
                 <X className="w-6 h-6" />
-              </button>
-            </div>
+        </button>
+      </div>
 
             <div className="space-y-6">
-              {results.summary && (
+          {results.summary && (
                 <div className="p-6 bg-neutral-50 rounded-xl">
                   <h4 className="font-semibold text-neutral-900 mb-3">📝 Meeting Summary</h4>
                   <p className="text-neutral-700 leading-relaxed">{results.summary}</p>
-                </div>
-              )}
+            </div>
+          )}
 
-              {results.actionItems && results.actionItems.length > 0 && (
+          {results.actionItems && results.actionItems.length > 0 && (
                 <div className="p-6 bg-blue-50 rounded-xl">
                   <h4 className="font-semibold text-neutral-900 mb-4">✅ Action Items ({results.actionItems.length})</h4>
                   <div className="space-y-3">
-                    {results.actionItems.map((item, index) => (
+                {results.actionItems.map((item, index) => (
                       <div key={index} className="bg-white p-4 rounded-lg border border-blue-200">
                         <div className="flex items-start justify-between mb-2">
                           <p className="font-medium text-neutral-900">{item.task}</p>
@@ -705,24 +705,24 @@ const AutomationPage = () => {
                             item.priority === 'Medium' ? 'bg-yellow-100 text-yellow-700' :
                               'bg-green-100 text-green-700'
                             }`}>
-                            {item.priority}
-                          </span>
-                        </div>
+                        {item.priority}
+                      </span>
+                    </div>
                         <div className="flex items-center space-x-4 text-sm text-neutral-600">
-                          <span>👤 {item.assignee || 'Unassigned'}</span>
-                          <span>📅 {item.dueDate || 'No due date'}</span>
-                        </div>
-                      </div>
-                    ))}
+                      <span>👤 {item.assignee || 'Unassigned'}</span>
+                      <span>📅 {item.dueDate || 'No due date'}</span>
+                    </div>
                   </div>
-                </div>
-              )}
+                ))}
+              </div>
+            </div>
+          )}
 
-              {results.jiraTasks && results.jiraTasks.length > 0 && (
+          {results.jiraTasks && results.jiraTasks.length > 0 && (
                 <div className="p-6 bg-green-50 rounded-xl">
                   <h4 className="font-semibold text-neutral-900 mb-4">🎯 Jira Tasks Created ({results.jiraTasks.length})</h4>
                   <div className="space-y-2">
-                    {results.jiraTasks.map((task, index) => (
+                {results.jiraTasks.map((task, index) => (
                       <div key={index} className="flex items-center justify-between p-3 bg-white rounded-lg border border-green-200">
                         <span className="font-medium text-green-700">{task.key}</span>
                         <a
@@ -733,14 +733,14 @@ const AutomationPage = () => {
                         >
                           <span>View in Jira</span>
                           <ChevronRight className="w-4 h-4" />
-                        </a>
-                      </div>
-                    ))}
+                    </a>
                   </div>
-                </div>
-              )}
+                ))}
+              </div>
+            </div>
+          )}
 
-              {results.notionPage && (
+          {results.notionPage && (
                 <div className="p-6 bg-purple-50 rounded-xl">
                   <h4 className="font-semibold text-neutral-900 mb-3">📋 Notion Page Created</h4>
                   <a
@@ -751,13 +751,13 @@ const AutomationPage = () => {
                   >
                     <span>Open in Notion</span>
                     <ChevronRight className="w-4 h-4" />
-                  </a>
-                </div>
-              )}
+              </a>
+            </div>
+          )}
             </div>
           </motion.div>
-        )}
-      </div>
+          )}
+        </div>
     </div>
   );
 };
@@ -837,7 +837,7 @@ const Footer = () => {
               <li><Link to="/automation" className="hover:text-white transition-colors">Automation</Link></li>
               <li><a href="#" className="hover:text-white transition-colors">Integrations</a></li>
             </ul>
-          </div>
+        </div>
 
           <div>
             <h4 className="font-semibold mb-4">Company</h4>
@@ -846,7 +846,7 @@ const Footer = () => {
               <li><a href="#" className="hover:text-white transition-colors">Blog</a></li>
               <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
             </ul>
-          </div>
+        </div>
 
           <div>
             <h4 className="font-semibold mb-4">Support</h4>
