@@ -8,9 +8,9 @@ function App() {
   const [error, setError] = useState(null)
 
   // Use relative path for Docker deployment, fallback to localhost for development
-  const API_BASE = process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:3001'
+  const API_BASE = process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:3001/api'
 
-  const handleMeetingProcess = async (formData, endpoint = 'process-meeting') => {
+  const handleMeetingProcess = async (formData, endpoint = 'meetings/process') => {
     setLoading(true)
     setError(null)
     try {
@@ -34,7 +34,7 @@ function App() {
     setLoading(true)
     setError(null)
     try {
-      const response = await fetch(`${API_BASE}/test-integrations`)
+      const response = await fetch(`${API_BASE}/integrations/test`)
       const data = await response.json()
       setResults(data)
     } catch (err) {
@@ -66,7 +66,7 @@ function App() {
       }
 
       // Use autonomous endpoint if autonomous mode is enabled
-      const endpoint = autonomousMode ? 'process-meeting-autonomous' : 'process-meeting'
+      const endpoint = autonomousMode ? 'meetings/process-autonomous' : 'meetings/process'
       handleMeetingProcess(data, endpoint)
     }
 
