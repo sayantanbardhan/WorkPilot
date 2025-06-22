@@ -1,12 +1,76 @@
-# React + Vite
+# WorkPilot Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, elegant frontend for WorkPilot - an intelligent meeting management platform that transforms meetings into actionable productivity.
 
-Currently, two official plugins are available:
+## Design Philosophy
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Inspired by the beautiful aesthetic of [Naya Studio](https://naya-studio-dubai.webflow.io/), this frontend creates immersive meeting experiences that bloom into productivity. Each interaction is shaped with intention to turn space into story — felt deeply, remembered clearly, and never quite forgotten.
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Modern Design**: Clean, minimalist interface with smooth animations
+- **Responsive Layout**: Optimized for all devices and screen sizes
+- **Smooth Animations**: Powered by Framer Motion for delightful interactions
+- **Beautiful Typography**: Custom font combinations for optimal readability
+- **Gradient Accents**: Sophisticated color palette with gradient highlights
+
+## Tech Stack
+
+- **React 19**: Latest React with modern features
+- **Tailwind CSS**: Utility-first CSS framework
+- **Framer Motion**: Smooth animations and transitions
+- **Lucide React**: Beautiful, customizable icons
+- **Vite**: Fast build tool and development server
+
+## Getting Started
+
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+2. Start development server:
+   ```bash
+   npm run dev
+   ```
+
+3. Build for production:
+   ```bash
+   npm run build
+   ```
+
+## Design System
+
+### Colors
+- **Primary**: Warm orange gradient (#f27522 to #0ea5e9)
+- **Neutral**: Clean grays for text and backgrounds
+- **Accent**: Blue tones for highlights and CTAs
+
+### Typography
+- **Headings**: Playfair Display (serif)
+- **Body**: Inter (sans-serif)
+
+### Components
+- Custom button styles with hover effects
+- Card components with subtle shadows
+- Responsive grid layouts
+- Smooth scroll animations
+
+## Structure
+
+```
+src/
+├── components/
+│   └── App.jsx          # Main application component
+├── index.css            # Global styles and Tailwind directives
+└── main.jsx             # Application entry point
+```
+
+## Contributing
+
+This frontend follows modern React best practices and emphasizes:
+- Clean, readable code
+- Responsive design principles
+- Accessibility considerations
+- Performance optimization
+- Beautiful user experiences
